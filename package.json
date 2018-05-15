@@ -1,0 +1,24 @@
+{
+  "name": "electronics-shop",
+  "version": "1.0.0",
+  "description": "Simple electronics shop created with flask and semantic-ui",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitaumoses4/electronics-shop.git"
+  },
+  "keywords": [
+    "flask",
+    "electronics-shop",
+    "semantic-ui"
+  ],
+  "author": "Moses Gitau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gitaumoses4/electronics-shop/issues"
+  },
+  "homepage": "https://github.com/gitaumoses4/electronics-shop#readme"
+}
