@@ -1,0 +1,18 @@
+language: python
+python:
+    - "2.7"
+    - "3.6"
+services:
+    - postgresql
+# install dependencies
+install:
+    - pip install -r requirements.txt
+before_script:
+    - psql -c 'create database electronics_shop_test;' -U postgres
+    - psql -c "create user foo with password 'bar';" -U postgres
+# run tests
+script:
+    - nosetests --with-coverage --cover-package app
+# run coverage tests
+after_success:
+- coveralls
