@@ -1,0 +1,57 @@
+{% extends "widgets/main.html" %}
+{% block content %}
+    <div class="ui container with-padding stackable grid" style="margin-top: 50px">
+        <div class="eight wide column centered">
+            <div class="ui center aligned container">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}"
+                         class="ui image medium middle aligned"/>
+                </a>
+            </div>
+            <div class="ui attached message" style="margin-top: 40px">
+                <div class="ui header centered">
+                    <h3>Admin Registration</h3>
+                </div>
+            </div>
+            <div class="ui attached segment">
+                <form class="ui form" id="registration_form">
+                    <div class="ui message error">
+                        <div class="content">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="username">Email: </label>
+                        <input type="email" placeholder="Email" name="email" required id="email"/>
+                    </div>
+                    <div class="field">
+                        <label for="username" data-error="Error">Username: </label>
+                        <input type="text" placeholder="Username" name="username" required id="username"/>
+                    </div>
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="Password" name="password" required id="password">
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input tabindex="0" class="hidden" type="checkbox" required>
+                            <label>Agree to Terms and Conditions</label>
+                        </div>
+                    </div>
+                    <div class="ui stackable grid">
+                        <div class="eight wide column center aligned">
+                            <button class="ui button green disabled fluid" type="submit">Submit</button>
+                        </div>
+                        <div class="eight wide column middle aligned">
+                            Already have an account? <a href="{{ url_for('admin_login') }}">Login</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='/js/jquery.serializejson.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/register.js') }}"></script>
+{% endblock %}
