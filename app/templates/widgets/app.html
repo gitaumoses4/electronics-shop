@@ -1,0 +1,40 @@
+{% extends "widgets/main.html" %}
+{% block content %}
+    {% block nav %}
+        <div class="ui segment">
+            <div class="ui container top-header">
+                <div class="ui grid">
+                    <div class="four wide column">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" class="ui large image"/>
+                    </div>
+                    <div class="ten wide column middle aligned">
+                        <p>Call Us: <b>+254 705 045 048</b> or <b>+254 780 146 036</b> | Email:
+                            <b>gitaumoses4@gmail.com</b></p>
+                        <div class="ui fluid category search">
+                            <div class="ui icon fluid input">
+                                <input type="text" class="prompt" placeholder="Search...">
+                                <i class="search icon"></i>
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui secondary menu">
+                <div class="ui container">
+                    <a href="" class="active item">
+                        Home
+                    </a>
+                    <div class="ui dropdown item">
+                        Accessories
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="" class="item">Computers</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}

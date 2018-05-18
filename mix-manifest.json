@@ -1,4 +1,6 @@
 {
-    "/static/css/semantic.css": "/static/css/semantic.css",
-    "/static/js/semantic.js": "/static/js/semantic.js"
+    "/app/static/css/semantic.css": "/app/static/css/semantic.css",
+    "/app/static/js/semantic.js": "/app/static/js/semantic.js",
+    "/app/static/js/jquery.js": "/app/static/js/jquery.js",
+    "/app/static/js/jquery.serializejson.js": "/app/static/js/jquery.serializejson.js"
 }

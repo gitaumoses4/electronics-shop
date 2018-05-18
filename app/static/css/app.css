@@ -1,0 +1,12 @@
+.with-padding{
+    padding: 20px;
+}
+
+body{
+    background: url("../images/background.png") #f9f9f9;
+}
+
+.top-header{
+    padding-top: 30px;
+    padding-bottom: 50px;
+}

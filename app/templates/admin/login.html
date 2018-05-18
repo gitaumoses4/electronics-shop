@@ -1,0 +1,42 @@
+{% extends "widgets/main.html" %}
+{% block content %}
+    <div class="ui container centered with-padding grid stackable" style="margin-top: 50px">
+        <div class="eight wide column">
+            <div class="ui container center aligned">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}"
+                         class="ui image medium middle aligned"/>
+                </a>
+            </div>
+            <div class="ui attached message" style="margin-top: 40px">
+                <div class="ui header centered">
+                    <h3>Admin Login</h3>
+                </div>
+            </div>
+            <div class="ui attached segment" >
+                <form class="ui form">
+                    <div class="ui message error">
+                        <div class="content">
+                            Error
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="username">Username: </label>
+                        <input type="text" placeholder="Username" name="username" required id="username"/>
+                    </div>
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="Password" name="password" required id="password">
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input tabindex="0" class="hidden" type="checkbox" name="remember" required>
+                            <label>Remember me</label>
+                        </div>
+                    </div>
+                    <button class="ui button fluid green" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
