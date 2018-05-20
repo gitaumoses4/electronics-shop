@@ -13,6 +13,10 @@ class BaseModel:
         db.session.add(self)
         db.session.commit()
 
+    @staticmethod
+    def update():
+        db.session.commit()
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -49,7 +53,8 @@ class User(BaseModel, db.Model):
     email = Column(String(1024), unique=True)
     password = Column(String(300))
     role = Column(Integer)
-    profile_picture = Column(String(100))
+    profile_picture = Column(String(300))
+    remember_token = Column(String(100))
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
 

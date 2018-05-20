@@ -1,8 +1,7 @@
 import json
 import unittest
 import app
-from os.path import join, dirname
-from dotenv import load_dotenv
+import models
 
 
 class CategoriesTestCase(unittest.TestCase):
@@ -21,7 +20,7 @@ class CategoriesTestCase(unittest.TestCase):
         res = self.client().post('/api/v1/category', data=self.category, headers=self.headers)
 
         with self.app.app_context():
-            app.db.drop_all()
+            models.db.drop_all()
         json_result = json.loads(res.get_data(as_text=True))
 
         print(json_result)
@@ -31,7 +30,4 @@ class CategoriesTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # Load file from the path.
-    load_dotenv(join(dirname(__file__), '.env'))
-    print(dirname(__file__))
     unittest.main()

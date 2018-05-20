@@ -2,6 +2,7 @@ from flask import render_template, request, jsonify
 from models import User, RevokedToken
 from flask_jwt_extended import JWTManager, jwt_required, get_raw_jwt
 from flask import session, Session
+from uuid import uuid4
 
 
 def create_routes(app):
@@ -34,6 +35,7 @@ def user_routes(app):
 
 
 def admin_routes(app):
+
     @app.route('/admin/login', methods=['POST', 'GET'])
     def admin_login():
         if request.method == 'POST':
@@ -49,9 +51,19 @@ def admin_routes(app):
             session['username'] = user.username
             session['email'] = user.email
             session['profile_picture'] = user.profile_picture
-            return jsonify({
-                'message': 'Login successful'
-            }), 200
+
+            response_json = {
+                'message': 'Login successful',
+                'redirect': '/admin'
+            }
+
+            if request.form.get('remember'):
+                token = uuid4()
+                response_json['remember_token'] = token
+                user.remember_token = token
+                user.update()
+
+            return jsonify(response_json), 200
         else:
             return render_template("admin/login.html")
 
@@ -79,12 +91,13 @@ def admin_routes(app):
             session['profile_picture'] = user.profile_picture
 
             return jsonify({
-                'message': 'Registration successful'
+                'message': 'Registration successful',
+                'redirect': '/admin'
             }), 201
 
     @app.route("/admin", methods=['GET'])
     def admin_index():
-        if session['username'] is None:
+        if session.get('username') is None:
             return "Not Logged in"
         else:
-            return "Logged in"
+            return request.cookies.get('remember_token')

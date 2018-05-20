@@ -13,11 +13,15 @@
                     <h3>Admin Login</h3>
                 </div>
             </div>
-            <div class="ui attached segment" >
-                <form class="ui form">
+            <div class="ui attached segment">
+                <form class="ui form" id="login_form">
                     <div class="ui message error">
                         <div class="content">
-                            Error
+                        </div>
+                    </div>
+                    <div class="ui message success">
+                        <div class="content">
+                            Welcome back ...
                         </div>
                     </div>
                     <div class="field">
@@ -30,7 +34,7 @@
                     </div>
                     <div class="field">
                         <div class="ui checkbox">
-                            <input tabindex="0" class="hidden" type="checkbox" name="remember" required>
+                            <input tabindex="0" class="hidden" type="checkbox" name="remember">
                             <label>Remember me</label>
                         </div>
                     </div>
@@ -39,4 +43,57 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const loginForm = $("#login_form");
+            const submitButton = loginForm.find(".ui.button");
+            loginForm.find("input[type=checkbox]").on('change', function () {
+                if ($(this).prop('checked')) {
+                    submitButton.removeClass('disabled')
+                } else {
+                    submitButton.addClass('disabled')
+                }
+            });
+
+            loginForm.on('submit', function (e) {
+                e.preventDefault();
+
+                loginForm.addClass("loading");
+                $.ajax({
+                    url: "/admin/login",
+                    method: 'POST',
+                    data: loginForm.serialize(),
+                    success: function (result) {
+                        let location = result['redirect'];
+
+                        if (result.hasOwnProperty("remember_token")) {
+                            let token = result['remember_token'];
+                            document.cookie = "remember_token=" + token;
+                        }
+                        loginForm.removeClass("loading");
+                        window.location.href = location;
+
+                        // set cookie
+                        loginForm.addClass("success");
+                        submitButton.addClass("disabled");
+                    },
+                    error: function (result) {
+                        loginForm.removeClass("loading");
+                        let errors = result['responseJSON']['errors'];
+
+                        let html = "<ul>";
+                        errors.forEach(function (error) {
+                            html += "<li>" + error + "</li>";
+                        });
+                        html += "</ul>";
+
+                        loginForm.find(".ui.error.message .content").html(html);
+                        loginForm.addClass("error");
+                    }
+                })
+            })
+        });
+    </script>
 {% endblock %}
